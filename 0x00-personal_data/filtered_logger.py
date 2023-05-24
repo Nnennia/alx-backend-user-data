@@ -57,6 +57,7 @@ def get_logger():
 
 
 def get_db():
+    """Connect to a db to read a db table"""
     username = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
     password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
     db_host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")

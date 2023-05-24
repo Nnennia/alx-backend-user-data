@@ -1,0 +1,58 @@
+Code Analysis
+
+Objective:
+The objective of the function filter_datum is to obfuscate specific fields in a log message by replacing their values with a redaction string. The function takes in a list of fields to be obfuscated, the redaction string, the log message, and a separator to split the message into individual fields.
+
+Inputs:
+- fields: a list of strings representing the fields to be obfuscated
+- redaction: a string representing the value to replace the obfuscated fields
+- message: a string representing the log message to be obfuscated
+- separator: a string representing the separator used to split the log message into individual fields
+
+Flow:
+1. The function calls the splitter function to split the log message into individual fields using the separator.
+2. For each field in the fields list, the function calls the pattern_replacement function to generate a regular expression pattern and replacement string.
+3. The function loops through each field in the log message and uses the re.sub function to replace any matches of the regular expression pattern with the replacement string.
+4. The function returns the obfuscated log message as a string with the fields joined by a semicolon.
+
+Outputs:
+- A string representing the obfuscated log message with the specified fields replaced by the redaction string.
+
+Additional aspects:
+- The function uses regular expressions to match and replace the specified fields in the log message.
+- The function uses the splitter function to split the log message into individual fields.
+- The function joins the obfuscated fields back together using a semicolon as the separator.
+
+
+Redacting formatter class
+Main functionalities:
+The RedactingFormatter class is a custom logging formatter that obfuscates sensitive information in log messages. It takes a list of fields to be redacted as input and replaces their values with a predefined string. The class inherits from the logging.Formatter class and overrides its format method to apply the redaction logic to the log message.
+
+Methods:
+- __init__(self, fields): Constructor method that initializes the RedactingFormatter object with a list of fields to be redacted.
+- format(self, record: logging.LogRecord) -> str: Overrides the format method of the logging.Formatter class to apply the redaction logic to the log message. It calls the filter_datum function to obfuscate the sensitive fields and returns the resulting message as a string.
+
+Fields:
+- REDACTION: A class-level constant that defines the string to be used for redaction.
+- FORMAT: A class-level constant that defines the format of the log message.
+- SEPARATOR: A class-level constant that defines the separator character used to split the log message into fields.
+- fields: An instance-level field that stores the list of fields to be redacted. It is initialized by the constructor method.
+
+get_logger function PII(Personal Identifiable Information)
+Objective:
+The objective of the get_logger() function is to create a logger object that can be used to log messages with a specified level of severity. The function sets up a logger with a specified name and level, adds a stream handler to the logger, and sets a custom formatter for the log messages.
+
+Inputs:
+The get_logger() function does not take any inputs.
+
+Flow:
+The get_logger() function first creates a new logger object with the name "user_data" and sets its level to INFO. It then sets the propagate attribute of the logger to False to prevent log messages from being passed up to the root logger. The function then creates a new stream handler with no specified stream, which means that log messages will be sent to the console by default. A custom formatter is created using the RedactingFormatter class, which takes the PII_FIELDS constant as an argument. The formatter is then added to the stream handler, and the stream handler is added to the logger. Finally, the function returns the logger object.
+
+Outputs:
+The get_logger() function returns a logger object that can be used to log messages.
+
+Additional aspects:
+- The RedactingFormatter class is defined in the code and is used to obfuscate sensitive information in log messages.
+- The PII_FIELDS constant is a tuple of strings that represent fields in log messages that contain sensitive information.
+- The function sets the level of the logger to INFO, which means that log messages with a severity level of INFO or higher will be logged.
+- The function sets the propagate attribute of the logger to False, which means that log messages will not be passed up to the root logger.

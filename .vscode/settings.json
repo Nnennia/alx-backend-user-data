@@ -3,5 +3,7 @@
         "gensalt",
         "hashpw",
         "levelname"
-    ]
+    ],
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.enabled": true
 }

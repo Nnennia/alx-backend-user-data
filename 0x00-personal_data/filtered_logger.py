@@ -42,7 +42,8 @@ class RedactingFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         message = super().format(record)
-        return filter_datum(self.fields, self.REDACTION, message, self.SEPARATOR)
+        return filter_datum(self.fields, self.REDACTION, message,
+                            self.SEPARATOR)
 
 
 def get_logger():
@@ -70,7 +71,8 @@ def main():
             cursor.execute("SELECT * FROM users;")
             fields = cursor.column_names
             for row in cursor:
-                message = ";".join("{}={}".format(k, v) for k, v in zip(fields, row))
+                message = ";".join("{}={}".format(k, v) for k,
+                                   v in zip(fields, row))
                 message = message.strip()
                 get_logger().info(message)
 

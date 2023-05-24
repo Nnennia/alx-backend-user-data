@@ -10,6 +10,7 @@ PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
 def splitter(message, separator):
+    """Splits the message for easy iteration"""
     return message.split(separator)
 
 
@@ -57,7 +58,7 @@ def get_logger():
 
 
 def get_db():
-    """Connect to a db to read a db table"""
+    """Returns a connector to the database"""
     username = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
     password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
     db_host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
